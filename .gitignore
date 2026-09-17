@@ -1,0 +1,13 @@
+venv/
+__pycache__/
+*.pyc
+
+dataset/
+models/
+*.keras
+*.h5
+
+results/
+*.png
+
+.env

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Prediction Result | BrainTumor AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🧠 BrainTumor AI
+        </div>
+
+        <div class="nav-links">
+         <a href="/">Home</a>
+         <a href="/history">History</a>
+         <a href="/about">About</a>
+        </div>
+
+    </nav>
+
+
+    <!-- ================= RESULT PAGE ================= -->
+
+    <main class="result-page">
+
+        <div class="result-container">
+
+
+            <!-- ================= HEADER ================= -->
+
+            <div class="result-header">
+
+                <div class="badge">
+                    Analysis Complete
+                </div>
+
+                <h1>
+                    MRI Analysis Result
+                </h1>
+
+                <p>
+                    The AI model has analyzed the uploaded MRI image.
+                </p>
+
+            </div>
+
+
+            <!-- ================= PREDICTION ================= -->
+
+            <div class="prediction-card">
+
+                <div class="prediction-title">
+
+                    <h2>
+                        Predicted Class
+                    </h2>
+
+                </div>
+
+
+                <div class="prediction-result">
+
+                    <div class="brain-icon">
+                        🧠
+                    </div>
+
+
+                    <div>
+
+                        <h2 class="prediction-name">
+                            {{ prediction }}
+                        </h2>
+
+
+                        <p class="confidence-text">
+
+                            Model Confidence:
+
+                            <strong>
+                                {{ "%.2f"|format(confidence) }}%
+                            </strong>
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= CONFIDENCE ================= -->
+
+                <div class="confidence-container">
+
+                    <div class="confidence-label">
+
+                        <span>
+                            Confidence
+                        </span>
+
+                        <span>
+                            {{ "%.2f"|format(confidence) }}%
+                        </span>
+
+                    </div>
+
+
+                    <div class="progress-bar">
+
+                        <div
+                            class="progress"
+                            id="confidenceProgress"
+                            data-confidence="{{ confidence }}"
+                        >
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= MRI IMAGES ================= -->
+
+            <div class="image-results">
+
+
+                <!-- ORIGINAL MRI -->
+
+                <div class="image-card">
+
+                    <h2>
+                        Original MRI
+                    </h2>
+
+                    <p>
+                        Uploaded MRI image
+                    </p>
+
+
+                    <div class="image-container">
+
+                        <img
+                            src="{{ url_for(
+                                'static',
+                                filename='uploads/' + image_file
+                            ) }}"
+                            alt="Uploaded MRI Image"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- GRAD-CAM -->
+
+                <div class="image-card">
+
+                    <h2>
+                        Grad-CAM Explanation
+                    </h2>
+
+                    <p>
+                        Regions influencing the prediction
+                    </p>
+
+
+                    <div class="image-container">
+
+                        <img
+                            src="{{ url_for(
+                                'static',
+                                filename='uploads/' + gradcam_file
+                            ) }}"
+                            alt="Grad-CAM Explanation"
+                        >
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ================= GRAD-CAM INFORMATION ================= -->
+
+            <div class="explanation-card">
+
+                <h2>
+                    What is Grad-CAM?
+                </h2>
+
+
+                <p>
+
+                    Grad-CAM (Gradient-weighted Class Activation
+                    Mapping) is an explainable AI technique that
+                    highlights regions of an image that contributed
+                    to the model's prediction.
+
+                </p>
+
+
+                <div class="heatmap-info">
+
+                    🔎
+
+                    The highlighted regions represent areas that
+                    influenced the model's prediction. They should
+                    not be interpreted as a clinical tumor
+                    segmentation or diagnosis.
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= ACTION ================= -->
+
+            <div class="actions">
+
+                <a
+                    href="/"
+                    class="back-button"
+                >
+
+                    ← Analyze Another MRI
+
+                </a>
+
+            </div>
+
+
+            <!-- ================= DISCLAIMER ================= -->
+
+            <div class="result-disclaimer">
+
+                <strong>
+                    Important Disclaimer
+                </strong>
+
+
+                <p>
+
+                    This application is an academic research
+                    prototype intended for educational and research
+                    purposes only. The prediction generated by
+                    this artificial intelligence model should not
+                    be considered a medical diagnosis.
+
+                    Please consult a qualified medical professional
+                    for clinical interpretation of MRI images.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            BrainTumor AI — Academic Research Project
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        const progress =
+            document.getElementById(
+                "confidenceProgress"
+            );
+
+
+        const confidence =
+            progress.getAttribute(
+                "data-confidence"
+            );
+
+
+        progress.style.width =
+            confidence + "%";
+
+    </script>
+
+
+</body>
+
+</html>

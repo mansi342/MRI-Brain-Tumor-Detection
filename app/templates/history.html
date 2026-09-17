@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Prediction History | BrainTumor AI</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            🧠 BrainTumor AI
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/history">History</a>
+            <a href="/about">About</a>
+        </div>
+
+    </nav>
+
+
+    <!-- History Section -->
+    <section class="history-section">
+
+        <div class="history-header">
+
+            <span class="section-badge">
+                Prediction Records
+            </span>
+
+            <h1>
+                Prediction History
+            </h1>
+
+            <p>
+                View previous MRI image analysis results.
+            </p>
+
+        </div>
+
+
+        <!-- History Table -->
+        <div class="history-card">
+
+            {% if predictions %}
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>#</th>
+                            <th>Image Name</th>
+                            <th>Prediction</th>
+                            <th>Confidence</th>
+                            <th>Date & Time</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for item in predictions %}
+
+                        <tr>
+
+                            <td>
+                                {{ loop.index }}
+                            </td>
+
+                            <td class="image-name">
+                                {{ item["image_name"] }}
+                            </td>
+
+                            <td>
+
+                                {% if item["prediction"] == "Glioma" %}
+
+                                    <span class="prediction-badge glioma">
+                                        Glioma
+                                    </span>
+
+                                {% elif item["prediction"] == "Meningioma" %}
+
+                                    <span class="prediction-badge meningioma">
+                                        Meningioma
+                                    </span>
+
+                                {% elif item["prediction"] == "Pituitary Tumor" %}
+
+                                    <span class="prediction-badge pituitary">
+                                        Pituitary Tumor
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="prediction-badge no-tumor">
+                                        No Tumor
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+                                    {{ "%.2f"|format(item["confidence"]) }}%
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+                                {{ item["created_at"] }}
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+                <div class="empty-history">
+
+                    <div class="empty-icon">
+                        🧠
+                    </div>
+
+                    <h2>
+                        No Predictions Yet
+                    </h2>
+
+                    <p>
+                        Upload an MRI image to create your
+                        first prediction record.
+                    </p>
+
+                    <a href="/" class="primary-btn">
+                        Analyze MRI
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </section>
+
+
+    <!-- Disclaimer -->
+    <section class="disclaimer">
+
+        <strong>Medical Disclaimer:</strong>
+
+        This application is an academic research prototype
+        and is not intended to provide medical diagnosis.
+        Results should be reviewed by qualified healthcare
+        professionals.
+
+    </section>
+
+</body>
+
+</html>

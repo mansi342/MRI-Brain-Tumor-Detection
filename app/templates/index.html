@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BrainTumor AI | MRI Detection</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🧠 BrainTumor AI
+        </div>
+        <div class="nav-links">
+         <a href="/">Home</a>
+         <a href="/history">History</a>
+         <a href="/about">About</a>
+        </div>
+
+        
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <main class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                AI-Powered MRI Analysis
+            </div>
+
+
+            <h1>
+                Brain Tumor
+                <span>Detection</span>
+            </h1>
+
+
+            <p class="description">
+
+                Upload an MRI brain image and our deep learning
+                model will classify it into one of four categories:
+
+                <strong>
+                    Glioma, Meningioma, Pituitary Tumor, or No Tumor.
+                </strong>
+
+            </p>
+
+
+            <!-- ================= UPLOAD CARD ================= -->
+
+            <div class="upload-card">
+
+                <div class="upload-icon">
+                    🧠
+                </div>
+
+
+                <h2>
+                    Upload MRI Image
+                </h2>
+
+
+                <p>
+                    Supported formats: JPG, JPEG, PNG
+                </p>
+
+
+                <form
+                    action="/predict"
+                    method="POST"
+                    enctype="multipart/form-data"
+                    id="uploadForm"
+                >
+
+                    <!-- Hidden actual file input -->
+
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept=".jpg,.jpeg,.png,image/jpeg,image/png"
+                        required
+                    >
+
+
+                    <!-- Custom upload button -->
+
+                    <label
+                        for="image"
+                        class="file-label"
+                    >
+
+                        📁 Choose MRI Image
+
+                    </label>
+
+
+                    <!-- Selected filename -->
+
+                    <div
+                        id="fileName"
+                        class="file-name"
+                    >
+                        No image selected
+                    </div>
+
+
+                    <!-- Analyze button -->
+
+                    <button
+                        type="submit"
+                        class="analyze-button"
+                        id="analyzeButton"
+                    >
+
+                        🔍 Analyze MRI
+
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- ================= SUPPORTED CLASSES ================= -->
+
+            <div class="classes">
+
+                <div class="class-item">
+                    <span>●</span>
+                    Glioma
+                </div>
+
+                <div class="class-item">
+                    <span>●</span>
+                    Meningioma
+                </div>
+
+                <div class="class-item">
+                    <span>●</span>
+                    Pituitary Tumor
+                </div>
+
+                <div class="class-item">
+                    <span>●</span>
+                    No Tumor
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section
+        id="about"
+        class="about-section"
+    >
+
+        <div class="about-container">
+
+            <div class="badge">
+                About The System
+            </div>
+
+
+            <h2>
+                Explainable Brain Tumor Classification
+            </h2>
+
+
+            <p>
+
+                This academic project uses an EfficientNetB0
+                deep learning model to classify brain MRI images
+                into four categories. Grad-CAM is used to provide
+                a visual explanation of the model prediction.
+
+            </p>
+
+
+            <div class="features">
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🎯
+                    </div>
+
+                    <h3>
+                        4-Class Classification
+                    </h3>
+
+                    <p>
+                        Glioma, Meningioma, Pituitary Tumor,
+                        and No Tumor.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🤖
+                    </div>
+
+                    <h3>
+                        Deep Learning
+                    </h3>
+
+                    <p>
+                        EfficientNetB0 transfer learning is used
+                        for MRI image classification.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🔎
+                    </div>
+
+                    <h3>
+                        Explainable AI
+                    </h3>
+
+                    <p>
+                        Grad-CAM highlights image regions that
+                        influence the model prediction.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= DISCLAIMER ================= -->
+
+    <footer>
+
+        <p>
+
+            <strong>Academic Research Prototype</strong>
+
+            <br>
+
+            This application is intended for educational and
+            research purposes only. It is not a medical diagnostic
+            device and should not replace professional medical advice.
+
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        const imageInput =
+            document.getElementById("image");
+
+        const fileName =
+            document.getElementById("fileName");
+
+        const uploadForm =
+            document.getElementById("uploadForm");
+
+        const analyzeButton =
+            document.getElementById("analyzeButton");
+
+
+        // Display selected filename
+
+        imageInput.addEventListener(
+            "change",
+            function () {
+
+                if (this.files && this.files.length > 0) {
+
+                    fileName.textContent =
+                        "Selected: " + this.files[0].name;
+
+                } else {
+
+                    fileName.textContent =
+                        "No image selected";
+
+                }
+
+            }
+        );
+
+
+        // Show loading message
+
+        uploadForm.addEventListener(
+            "submit",
+            function () {
+
+                analyzeButton.textContent =
+                    "⏳ Analyzing MRI...";
+
+                analyzeButton.disabled = true;
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>About | BrainTumor AI</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            🧠 BrainTumor AI
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/history">History</a>
+            <a href="/about">About</a>
+        </div>
+
+    </nav>
+
+
+    <!-- About Hero -->
+    <section class="about-section">
+
+        <div class="about-header">
+
+            <span class="section-badge">
+                About the Project
+            </span>
+
+            <h1>
+                Explainable AI for<br>
+                Brain Tumor MRI Analysis
+            </h1>
+
+            <p>
+                A deep learning based academic project
+                for multi-class classification of brain MRI images.
+            </p>
+
+        </div>
+
+
+        <!-- Project Overview -->
+        <div class="about-card">
+
+            <h2>
+                Project Overview
+            </h2>
+
+            <p>
+                BrainTumor AI is an academic research prototype
+                designed to classify brain MRI images into four
+                categories using deep learning.
+            </p>
+
+            <p>
+                The system uses transfer learning with an
+                EfficientNetB0 model and provides an
+                explainability feature using Grad-CAM.
+            </p>
+
+        </div>
+
+
+        <!-- Classes -->
+        <div class="about-card">
+
+            <h2>
+                Supported Classes
+            </h2>
+
+            <div class="class-grid">
+
+                <div class="class-item">
+                    <span>🧠</span>
+                    <h3>Glioma</h3>
+                    <p>
+                        Brain tumor classification category.
+                    </p>
+                </div>
+
+                <div class="class-item">
+                    <span>🧠</span>
+                    <h3>Meningioma</h3>
+                    <p>
+                        Brain tumor classification category.
+                    </p>
+                </div>
+
+                <div class="class-item">
+                    <span>🧠</span>
+                    <h3>Pituitary Tumor</h3>
+                    <p>
+                        Brain tumor classification category.
+                    </p>
+                </div>
+
+                <div class="class-item">
+                    <span>✓</span>
+                    <h3>No Tumor</h3>
+                    <p>
+                        MRI images without a tumor category.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Technology -->
+        <div class="about-card">
+
+            <h2>
+                Technologies Used
+            </h2>
+
+            <div class="technology-list">
+
+                <span>Python</span>
+                <span>TensorFlow</span>
+                <span>Keras</span>
+                <span>EfficientNetB0</span>
+                <span>OpenCV</span>
+                <span>NumPy</span>
+                <span>scikit-learn</span>
+                <span>Flask</span>
+                <span>SQLite</span>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Explainable AI -->
+        <div class="about-card">
+
+            <h2>
+                Explainable AI
+            </h2>
+
+            <p>
+                The application uses Grad-CAM
+                (Gradient-weighted Class Activation Mapping)
+                to provide a visual explanation of the model's
+                prediction.
+            </p>
+
+            <p>
+                The generated heatmap highlights image regions
+                that contributed to the model's prediction,
+                helping users understand which areas influenced
+                the classification.
+            </p>
+
+        </div>
+
+
+        <!-- Workflow -->
+        <div class="about-card">
+
+            <h2>
+                System Workflow
+            </h2>
+
+            <div class="workflow">
+
+                <div class="workflow-step">
+                    <strong>01</strong>
+                    <span>Upload MRI</span>
+                </div>
+
+                <div class="workflow-arrow">
+                    →
+                </div>
+
+                <div class="workflow-step">
+                    <strong>02</strong>
+                    <span>Preprocessing</span>
+                </div>
+
+                <div class="workflow-arrow">
+                    →
+                </div>
+
+                <div class="workflow-step">
+                    <strong>03</strong>
+                    <span>AI Prediction</span>
+                </div>
+
+                <div class="workflow-arrow">
+                    →
+                </div>
+
+                <div class="workflow-step">
+                    <strong>04</strong>
+                    <span>Grad-CAM</span>
+                </div>
+
+                <div class="workflow-arrow">
+                    →
+                </div>
+
+                <div class="workflow-step">
+                    <strong>05</strong>
+                    <span>Result</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Disclaimer -->
+        <div class="about-disclaimer">
+
+            <h3>
+                ⚠ Medical Disclaimer
+            </h3>
+
+            <p>
+                This application is an academic research
+                prototype and is not intended to provide
+                medical diagnosis or replace professional
+                medical advice. Predictions should not be
+                used as the sole basis for clinical decisions.
+                MRI interpretation should be performed by
+                qualified healthcare professionals.
+            </p>
+
+        </div>
+
+    </section>
+
+
+</body>
+
+</html>
