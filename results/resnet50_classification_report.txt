@@ -1,0 +1,15 @@
+ResNet50 Classification Report
+===============================
+
+Test Accuracy: 87.63%
+
+              precision    recall  f1-score   support
+
+      glioma     0.9151    0.7275    0.8106       400
+  meningioma     0.7912    0.8050    0.7980       400
+    no_tumor     0.8939    0.9900    0.9395       400
+   pituitary     0.9097    0.9825    0.9447       400
+
+    accuracy                         0.8762      1600
+   macro avg     0.8775    0.8762    0.8732      1600
+weighted avg     0.8775    0.8762    0.8732      1600
