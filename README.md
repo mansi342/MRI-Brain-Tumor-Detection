@@ -1,45 +1,25 @@
 # 🧠 MRI Brain Tumor Detection
 
-An AI/ML-based web application for detecting and classifying brain tumors from MRI images using Deep Learning and Transfer Learning.
+An AI/ML-based web application for detecting and classifying brain tumors from MRI images using Deep Learning, Transfer Learning, and Explainable AI.
 
 The system classifies MRI images into four categories:
 
 - Glioma
 - Meningioma
 - No Tumor
-- Pituitary
+- Pituitary Tumor
 
-The trained model is integrated with a Flask web application where users can upload an MRI image and receive a predicted class with confidence. The project also includes model evaluation and Grad-CAM based visualization.
+The trained deep learning model is integrated with a Flask web application where users can upload an MRI image and receive a predicted class with confidence. The project also includes model evaluation and Grad-CAM-based visualization for model interpretability.
 
 ---
 
 ## 📌 Project Overview
 
-Brain tumors require accurate diagnosis and timely medical attention. This project demonstrates how Deep Learning can be used to classify brain MRI images into different tumor categories.
+Brain tumors require accurate diagnosis and timely medical attention. This project demonstrates how Deep Learning and Transfer Learning can be used to classify brain MRI images into different categories.
 
-The project uses **EfficientNetB0 with Transfer Learning**. The pretrained ImageNet model is used as the feature extractor, followed by a custom classification layer for the four MRI classes.
+Multiple CNN architectures were explored during development, including EfficientNetB0 and ResNet50.
 
-### Workflow
-
-MRI Image  
-↓  
-Image Preprocessing  
-↓  
-Data Augmentation  
-↓  
-EfficientNetB0  
-↓  
-Feature Extraction  
-↓  
-Global Average Pooling  
-↓  
-Dropout  
-↓  
-Dense Layer (4 Classes)  
-↓  
-Softmax Prediction  
-↓  
-Predicted Tumor Class + Confidence
+The final evaluated model is **ResNet50**, which achieved a test accuracy of **87.63%** on 1,600 test images.
 
 ---
 
@@ -47,8 +27,11 @@ Predicted Tumor Class + Confidence
 
 - MRI brain tumor classification
 - Four-class classification
-- EfficientNetB0 transfer learning
-- Image augmentation
+- Transfer Learning
+- ResNet50 deep learning model
+- EfficientNetB0 experimentation
+- Image preprocessing
+- Data augmentation
 - Model training and validation
 - Test-set evaluation
 - Accuracy, Precision, Recall and F1-score
@@ -56,8 +39,8 @@ Predicted Tumor Class + Confidence
 - Classification Report
 - Grad-CAM visualization
 - Flask-based web application
-- Prediction history
-- Trained model saved in Keras format
+- Prediction history using SQLite
+- Trained models saved in Keras format
 
 ---
 
@@ -65,33 +48,33 @@ Predicted Tumor Class + Confidence
 
 | Class | Description |
 |---|---|
-| Glioma | A tumor originating from glial cells |
-| Meningioma | A tumor arising from the meninges |
-| No Tumor | MRI image without a detected tumor class |
-| Pituitary | Tumor involving the pituitary region |
+| Glioma | Tumor originating from glial cells |
+| Meningioma | Tumor arising from the meninges |
+| No Tumor | MRI image classified as having no tumor |
+| Pituitary Tumor | Tumor involving the pituitary region |
 
 ---
 
-## 🤖 Model Architecture
+## 📊 Dataset
 
-The project uses **EfficientNetB0** with Transfer Learning.
-
-### Architecture
+The dataset contains four classes:
 
 ```text
-Input Image (224 × 224 × 3)
-          ↓
-Data Augmentation
-          ↓
-EfficientNetB0
-(ImageNet Weights)
-          ↓
-Global Average Pooling
-          ↓
-Dropout (0.3)
-          ↓
-Dense Layer (4 neurons)
-          ↓
-Softmax
-          ↓
-4-Class Prediction
+dataset/
+├── train/
+│   ├── glioma/
+│   ├── meningioma/
+│   ├── no_tumor/
+│   └── pituitary/
+│
+├── validation/
+│   ├── glioma/
+│   ├── meningioma/
+│   ├── no_tumor/
+│   └── pituitary/
+│
+└── test/
+    ├── glioma/
+    ├── meningioma/
+    ├── no_tumor/
+    └── pituitary/
